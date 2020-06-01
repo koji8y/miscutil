@@ -10,7 +10,7 @@ from functools import reduce
 from itertools import tee
 from pathlib import Path
 
-__version__ = '0.9.2'
+__version__ = '0.9.3'
 
 
 TTT = TypeVar('TTT')
