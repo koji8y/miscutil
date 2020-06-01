@@ -1,5 +1,6 @@
 from pathlib import Path
 from typing import Any, Callable, Iterable, Optional, TypeVar
+from typing import Generic
 
 TTT = TypeVar('TTT')
 TTT2 = TypeVar('TTT2')
@@ -7,7 +8,7 @@ TTT2 = TypeVar('TTT2')
 def none_or(value: Optional[TTT], convert: Callable[[TTT], TTT2]) -> Optional[TTT2]: ...
 def if_none(value: Optional[TTT], generate_alt: Callable[[], TTT]) -> TTT: ...
 
-class Entype:
+class Entype(Generic[TTT]):
     @classmethod
     def coerce(cls: Any, elem: Any) -> TTT: ...
 
