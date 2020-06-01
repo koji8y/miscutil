@@ -1,0 +1,3 @@
+from typing import List
+
+def color_range(start_color: str, goal_color: str, count: int) -> List[str]: ...

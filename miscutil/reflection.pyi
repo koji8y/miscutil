@@ -1,0 +1,3 @@
+from typing import Any
+
+def get_module(fully_qualified_name: str) -> Any: ...
