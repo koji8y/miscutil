@@ -10,7 +10,7 @@ from functools import reduce
 from itertools import tee
 from pathlib import Path
 
-__version__ = '0.9.3'
+__version__ = '0.10.0'
 
 
 TTT = TypeVar('TTT')
@@ -18,14 +18,23 @@ TTT2 = TypeVar('TTT2')
 
 
 def none_or(value: Optional[TTT],
-            convert: Callable[[TTT], TTT2]) -> Optional[TTT2]:
+            convert: Callable[[TTT], TTT2],
+            value_for_none: Optional[
+                Callable[[], Optional[TTT2]]] = None) -> Optional[TTT2]:
     """get converted value if other than None is passed."""
-    return None if value is None else convert(value)
+    return ((None if value_for_none is None else value_for_none())
+            if value is None else convert(value))
 
 
 def if_none(value: Optional[TTT], generate_alt: Callable[[], TTT]) -> TTT:
     """supply alternate value if None is passed."""
     return generate_alt() if value is None else value
+
+
+def ensure_not_none(value: Optional[TTT]) -> TTT:
+    """ensure the value is not None."""
+    assert value is not None
+    return value
 
 
 class Entype(Generic[TTT]):  # pylint: disable=too-few-public-methods
