@@ -1,12 +1,12 @@
 """Utility library for json and yaml with intermediate expression."""
 from typing import Any
 from typing import Dict
-from typing import List
+from typing import Collection, List
 from typing import Optional
 from typing import Tuple
 
 from collections.abc import Mapping as ABCMapping  # type: ignore
-from enum import Enum
+from enum import Enum, IntEnum
 import json
 from unittest import TestCase
 import yaml
@@ -33,13 +33,19 @@ def json2yaml_lines(in_json: str, sort_keys: bool = True) -> List[str]:
 
 
 def to_json_using_slot(
-        self, attr_names: List[str] = None) -> Dict[str, Any]:
+        self,
+        attr_names: List[str] = None,
+        using_to_json: Collection[str] = None) -> Dict[str, Any]:
     """convert object having to_json method to JSON."""
     obj: Dict[str, Any] = {KEY_NAME_FOR_TYPE: self.__class__.__name__}
     if attr_names is None:
         attr_names = self.__slot__
     for attr_name in attr_names:
-        obj.update({attr_name: getattr(self, attr_name)})
+        val = getattr(self, attr_name)
+        if using_to_json is not None and attr_name in using_to_json:
+            obj.update({attr_name: val.to_json()})
+        else:
+            obj.update({attr_name: val})
     return obj
 
 
