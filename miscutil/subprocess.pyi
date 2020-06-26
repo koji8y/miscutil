@@ -1,7 +1,7 @@
 import subprocess
 from enum import Enum
 from miscutil.yamljson import to_yaml_str as to_yaml_str
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 class Duration:
     class _Status(Enum):
@@ -26,4 +26,4 @@ class CommandResult:
     def __init__(self, result: subprocess.CompletedProcess) -> None: ...
     def to_dict(self) -> Dict[str, Any]: ...
 
-def run_command(cmd_args: List[str], show_process: bool=..., cwd: str=...) -> CommandResult: ...
+def run_command(cmd_args: List[str], show_process: bool=..., cwd: Optional[str]=...) -> CommandResult: ...
