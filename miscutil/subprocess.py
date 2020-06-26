@@ -1,7 +1,5 @@
 """Utilities for subprocess"""
-from typing import Any
-from typing import Dict
-from typing import List
+from typing import Any, Dict, List, Optional
 
 from datetime import datetime
 from enum import Enum

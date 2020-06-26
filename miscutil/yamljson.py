@@ -6,7 +6,7 @@ from typing import Optional
 from typing import Tuple
 
 from collections.abc import Mapping as ABCMapping  # type: ignore
-from enum import Enum, IntEnum
+from enum import Enum
 import json
 from unittest import TestCase
 import yaml
