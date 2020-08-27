@@ -35,9 +35,12 @@ def json2yaml_lines(in_json: str, sort_keys: bool = True) -> List[str]:
 def to_json_using_slot(
         self,
         attr_names: List[str] = None,
-        using_to_json: Collection[str] = None) -> Dict[str, Any]:
+        using_to_json: Collection[str] = None,
+        with_key_name: bool = True) -> Dict[str, Any]:
     """convert object having to_json method to JSON."""
-    obj: Dict[str, Any] = {KEY_NAME_FOR_TYPE: self.__class__.__name__}
+    obj: Dict[str, Any] = ({KEY_NAME_FOR_TYPE: self.__class__.__name__}
+                           if with_key_name else
+                           {})
     if attr_names is None:
         attr_names = self.__slot__
     for attr_name in attr_names:
