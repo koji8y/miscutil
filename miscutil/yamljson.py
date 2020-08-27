@@ -6,7 +6,7 @@ from typing import Optional
 from typing import Tuple
 
 from collections.abc import Mapping as ABCMapping  # type: ignore
-from enum import Enum, IntEnum
+from enum import Enum
 import json
 from unittest import TestCase
 import yaml
@@ -42,7 +42,8 @@ def to_json_using_slot(
         attr_names = self.__slot__
     for attr_name in attr_names:
         val = getattr(self, attr_name)
-        if using_to_json is not None and attr_name in using_to_json:
+        if val is not None and (using_to_json is not None and
+                                attr_name in using_to_json):
             obj.update({attr_name: val.to_json()})
         else:
             obj.update({attr_name: val})
