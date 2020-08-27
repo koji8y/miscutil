@@ -1,7 +1,5 @@
 """Utilities for subprocess"""
-from typing import Any
-from typing import Dict
-from typing import List
+from typing import Any, Dict, List, Optional
 
 from datetime import datetime
 from enum import Enum
@@ -67,7 +65,7 @@ class CommandResult:
 def run_command(
         cmd_args: List[str],
         show_process: bool = False,
-        cwd: str = None) -> CommandResult:
+        cwd: Optional[str] = None) -> CommandResult:
     """invoke command.
     Note you make sure return code is zero by yourself.
     """
